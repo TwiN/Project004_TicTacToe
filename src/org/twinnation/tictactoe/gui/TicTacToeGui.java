@@ -74,6 +74,7 @@ public class TicTacToeGui extends JFrame {
 							String[] win = winLine.split(",");
 							g.setColor(Color.RED);
 							g.drawLine(Integer.parseInt(win[0]), Integer.parseInt(win[1]), Integer.parseInt(win[2]), Integer.parseInt(win[3]));
+							g.setColor(Color.BLACK);
 						}
 					}
 				}
@@ -83,9 +84,7 @@ public class TicTacToeGui extends JFrame {
 		}
 
 		public void drawWin(Graphics g, int x1, int y1, int x2, int y2) {
-			System.out.println("drawWin has been called...");
 			this.winLine = x1+","+y1+","+x2+","+y2;
-			//g.drawLine(x1, y1, x2, y2);
 		}
 	}
 
