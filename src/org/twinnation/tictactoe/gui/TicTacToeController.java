@@ -79,12 +79,13 @@ public class TicTacToeController {
 							Thread.sleep(50);
 						}
 						game.play();
+						game.checkWin(gui.getPanel());
 						gui.setBoard(game.getBoard());
 						gui.repaint();
 						newMove = false;
 					}
-					gui.setBoard(game.getBoard()); // FIXME: duplicate
-					gui.repaint();
+					//gui.setBoard(game.getBoard()); // FIXME: duplicate
+					//gui.repaint();
 				}
 			} catch (Exception e) {
 				System.out.println("[ERROR] Something happened.");
