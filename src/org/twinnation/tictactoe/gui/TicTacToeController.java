@@ -51,7 +51,15 @@ public class TicTacToeController {
 				row = 3;
 			}
 
-			game.move(col, row);
+			if (game.isOver()) {
+				System.out.println("- THE GAME HAS BEEN SET AS TERMINATED -");
+				game = new TicTacToe();
+				gui.getPanel().restartGame();
+				gui.getPanel().repaint();
+
+			} else {
+				game.move(col, row);
+			}
 			newMove = true;
 		}
 
@@ -80,12 +88,13 @@ public class TicTacToeController {
 						}
 						game.play();
 						game.checkWin(gui.getPanel());
-						gui.setBoard(game.getBoard());
+						gui.getPanel().setBoard(game.getBoard());
 						gui.repaint();
 						newMove = false;
 					}
 					//gui.setBoard(game.getBoard()); // FIXME: duplicate
 					//gui.repaint();
+					Thread.sleep(300);
 				}
 			} catch (Exception e) {
 				System.out.println("[ERROR] Something happened.");
