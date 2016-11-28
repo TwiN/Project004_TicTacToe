@@ -72,48 +72,6 @@ public class TicTacToeController {
 		thread.run();
 	}
 
-	/** Mouse click handler */
-	/*
-	class MouseClickHandler implements MouseListener {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			int col, row;
-			// get column
-			if (e.getX()<(TicTacToeGui.FRAME_WIDTH/3)) {
-				col = 1;
-			} else if (e.getX()<((2*TicTacToeGui.FRAME_WIDTH)/3)) {
-				col = 2;
-			} else {
-				col = 3;
-			}
-			// get row
-			if (e.getY()<(TicTacToeGui.FRAME_HEIGHT/3)) {
-				row = 1;
-			} else if (e.getY()<((2*TicTacToeGui.FRAME_HEIGHT)/3)) {
-				row = 2;
-			} else {
-				row = 3;
-			}
-
-			if (game.isOver()) {
-				System.out.println("- THE GAME HAS BEEN SET AS TERMINATED -");
-				game = new TicTacToe();
-				gui.getPanel().restartGame();
-				gui.getPanel().repaint();
-
-			} else {
-				game.move(col, row);
-			}
-			newMove = true;
-		}
-
-		@Override public void mousePressed(MouseEvent e) {}
-		@Override public void mouseReleased(MouseEvent e) {}
-		@Override public void mouseEntered(MouseEvent e) {}
-		@Override public void mouseExited(MouseEvent e) {}
-	}
-	*/
 
 	class GameThread implements Runnable {
 		public void run() {
