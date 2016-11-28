@@ -1,9 +1,8 @@
 package org.twinnation.tictactoe.gui;
 
-import org.twinnation.tictactoe.bean.TicTacToe;
+import org.twinnation.tictactoe.game.TicTacToe;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 /**
  * @author chris
@@ -20,19 +19,68 @@ public class TicTacToeController {
 	public TicTacToeController(TicTacToeGui gui) {
 		this.gui = gui;
 		this.game = new TicTacToe();
-		this.gui.addMouseListener(new MouseClickHandler());
-		this.gui.getPanel().addMouseListener(new MouseClickHandler());
+		//this.gui.getPanel().addMouseListener(new MouseClickHandler());
+		this.gui.getPanel().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int col, row;
+				// get column
+				if (e.getX()<(TicTacToeGui.FRAME_WIDTH/3)) {
+					col = 1;
+				} else if (e.getX()<((2*TicTacToeGui.FRAME_WIDTH)/3)) {
+					col = 2;
+				} else {
+					col = 3;
+				}
+				// get row
+				if (e.getY()<(TicTacToeGui.FRAME_HEIGHT/3)) {
+					row = 1;
+				} else if (e.getY()<((2*TicTacToeGui.FRAME_HEIGHT)/3)) {
+					row = 2;
+				} else {
+					row = 3;
+				}
+
+				if (game.isOver()) {
+					System.out.println("- THE GAME HAS BEEN SET AS TERMINATED -");
+					game = new TicTacToe();
+					gui.getPanel().restartGame();
+					gui.getPanel().repaint();
+
+				} else {
+					game.move(col, row);
+				}
+				newMove = true;
+			}
+		});
+		// menu > exit
+		this.gui.getFrame().getJMenuBar().getMenu(0).getItem(0).addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		// menu > restart
+		this.gui.getFrame().getJMenuBar().getMenu(0).getItem(1).addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				game = new TicTacToe();
+				gui.getPanel().restartGame();
+				gui.getPanel().repaint();
+				newMove = true;
+			}
+		});
+
 		thread = new Thread(new GameThread());
 		thread.run();
 	}
 
 	/** Mouse click handler */
+	/*
 	class MouseClickHandler implements MouseListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			//System.out.println("Detected mouse click @ "+e.getX()+","+e.getY());
-
 			int col, row;
 			// get column
 			if (e.getX()<(TicTacToeGui.FRAME_WIDTH/3)) {
@@ -63,15 +111,12 @@ public class TicTacToeController {
 			newMove = true;
 		}
 
-		@Override
-		public void mousePressed(MouseEvent e) {}
-		@Override
-		public void mouseReleased(MouseEvent e) {}
-		@Override
-		public void mouseEntered(MouseEvent e) {}
-		@Override
-		public void mouseExited(MouseEvent e) {}
+		@Override public void mousePressed(MouseEvent e) {}
+		@Override public void mouseReleased(MouseEvent e) {}
+		@Override public void mouseEntered(MouseEvent e) {}
+		@Override public void mouseExited(MouseEvent e) {}
 	}
+	*/
 
 	class GameThread implements Runnable {
 		public void run() {
@@ -86,7 +131,6 @@ public class TicTacToeController {
 							//System.out.println("no new move made");
 							Thread.sleep(50);
 						}
-						game.play();
 						game.checkWin(gui.getPanel());
 						gui.getPanel().setBoard(game.getBoard());
 						gui.repaint();

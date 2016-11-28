@@ -1,4 +1,4 @@
-package org.twinnation.tictactoe.bean;
+package org.twinnation.tictactoe.game;
 
 import org.twinnation.tictactoe.gui.TicTacToeGui;
 
@@ -32,6 +32,7 @@ public class TicTacToe {
 		if (board[col-1][row-1] == ' ') {
 			board[col-1][row-1] = isCurrentTurnX ? 'X' : 'O';
 			isCurrentTurnX = !isCurrentTurnX;
+			turn++;
 		} else {
 			System.out.println("This case has already been played");
 		}
@@ -55,12 +56,6 @@ public class TicTacToe {
 
 	public boolean isOver() {
 		return isGameOver;
-	}
-
-
-	public void play() {
-		System.out.println("Next!");
-		turn++;
 	}
 
 

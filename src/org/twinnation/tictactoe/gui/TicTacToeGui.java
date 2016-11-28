@@ -2,6 +2,8 @@ package org.twinnation.tictactoe.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 /**
@@ -15,17 +17,28 @@ public class TicTacToeGui extends JFrame {
 	private JFrame frame = new JFrame();
 	private GPanel panel;
 
-	//char[][] board;
-
 
 	public TicTacToeGui() {
 		frame.setTitle("TicTacToe");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width+FRAME_WIDTH)/3, 100);
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		frame.getContentPane().setPreferredSize(new Dimension(
 				FRAME_WIDTH, FRAME_HEIGHT));
-		panel = new GPanel();
 
+		// menu
+		JMenuBar menuBar = new JMenuBar();
+		JMenu menu = new JMenu("Menu");
+		menuBar.add(menu);
+		JMenuItem exitBtn = new JMenuItem("Exit");
+		menu.add(exitBtn);
+		JMenuItem restartBtn = new JMenuItem("Restart");
+		menu.add(restartBtn);
+		frame.setJMenuBar(menuBar);
+
+
+		// panel
+		panel = new GPanel();
 		frame.add(panel);
 		frame.pack();
 		frame.setVisible(true);
@@ -33,6 +46,10 @@ public class TicTacToeGui extends JFrame {
 
 	public GPanel getPanel() {
 		return panel;
+	}
+
+	public JFrame getFrame() {
+		return frame;
 	}
 
 	@Override
@@ -75,7 +92,6 @@ public class TicTacToeGui extends JFrame {
 				g.drawLine(0, (x*FRAME_HEIGHT) / 3, FRAME_WIDTH, (x*FRAME_HEIGHT) / 3);
 			}
 			if (board != null) {
-
 				for (int i = 0; i < board.length; i++) {
 					for (int j = 0; j < board[i].length; j++) {
 						g.setFont(new Font("Arial", 1, 48));
@@ -99,8 +115,8 @@ public class TicTacToeGui extends JFrame {
 			this.winLine = x1+","+y1+","+x2+","+y2;
 		}
 
+		// FIXME: this shouldn't be called restartGame since it just sets the winLine to null
 		public void restartGame() {
-			System.out.println("TicTacToeGui > GPanel > restartGame()");
 			this.winLine = null;
 		}
 	}
