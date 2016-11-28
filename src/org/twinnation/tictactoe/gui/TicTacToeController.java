@@ -4,9 +4,6 @@ import org.twinnation.tictactoe.game.TicTacToe;
 
 import java.awt.event.*;
 
-/**
- * @author chris
- */
 public class TicTacToeController {
 
 	private TicTacToeGui gui;
