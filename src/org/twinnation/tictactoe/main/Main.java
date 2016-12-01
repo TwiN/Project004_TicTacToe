@@ -4,7 +4,7 @@ import org.twinnation.tictactoe.gui.TicTacToeController;
 import org.twinnation.tictactoe.gui.TicTacToeGui;
 
 /**
- * @author chris
+ * Class used to run the game and the GUI
  */
 public class Main {
 

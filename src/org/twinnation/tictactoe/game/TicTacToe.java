@@ -5,7 +5,7 @@ import org.twinnation.tictactoe.gui.TicTacToeGui;
 import java.util.Arrays;
 
 /**
- * @author chris
+ * Class that assume the role of the TicTacToe game
  */
 public class TicTacToe {
 
@@ -15,6 +15,7 @@ public class TicTacToe {
 	private char[][] board = new char[3][3];
 
 
+	/** Constructor */
 	public TicTacToe() {
 		System.out.println("New game started!");
 		for (int i = 0; i<board.length; i++) {
@@ -27,6 +28,11 @@ public class TicTacToe {
 		this.turn = 0;
 	}
 
+	/**
+	 *  Moves a piece to the given coordinate
+	 * @param col Column coordinate
+	 * @param row Row coordinate
+	 */
 	public void move(int col, int row) {
 		//System.out.println("("+col+", "+row+")");
 		if (board[col-1][row-1] == ' ') {
@@ -39,12 +45,19 @@ public class TicTacToe {
 	}
 
 
+	/**
+	 * Gets the TicTacToe board
+	 * @return array representing the tictactoe board
+	 */
 	public char[][] getBoard() {
 		System.out.println("returning board: \n"+ Arrays.toString(board[0])+"\n"+Arrays.toString(board[1])+"\n"+Arrays.toString(board[2]));
 		return board;
 	}
 
-
+	/**
+	 * Sets the tictactoe board
+	 * @param board The board to set
+	 */
 	public void setBoard(char[][] board) {
 		for (int i = 0; i<board.length; i++) {
 			for (int j = 0; j<board[i].length; j++) {
@@ -54,11 +67,19 @@ public class TicTacToe {
 	}
 
 
+	/**
+	 * Gets the status of the game
+	 * @return true if game is over, false if game isn't
+	 */
 	public boolean isOver() {
 		return isGameOver;
 	}
 
 
+	/**
+	 * Checks if there is a win, and if there is, draw a line on the panel
+	 * @param panel Panel to draw the line on
+	 */
 	public void checkWin(TicTacToeGui.GPanel panel) {
 		char[][] b = this.board;
 		boolean gameOver = false;
